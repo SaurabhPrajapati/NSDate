@@ -51,6 +51,23 @@
     
     //Here Date Matched So You Get 1
     NSLog(@"%d",[self isDate:strCurrentDate isEqualToDate:[self stringFromDate:CmpDate]]);
+    
+    //Get Same Day Of Next WEEK
+    //For Example take sunday
+    
+    NSString *sunday = @"10-11-2014";
+    NSDate *dateSunday = [self dateFromString:sunday];
+    [self GetDayInNextWeek:dateSunday];
+}
+-(void)GetDayInNextWeek:(NSDate*)date
+{
+    NSDate *NextSunday = [[NSDate alloc]init];
+    
+    NSCalendar *gregorian = [[NSCalendar alloc]initWithCalendarIdentifier:NSCalendarIdentifierGregorian];
+    NSDateComponents *components = [gregorian components:( NSCalendarUnitYear | NSCalendarUnitMonth | NSCalendarUnitDay) fromDate:date];
+    components.day = components.day + 8;
+    NextSunday = [gregorian dateFromComponents:components];
+    NSLog(@"%@",NextSunday);
 }
 - (BOOL)isDate:(NSDate *)date inRangeFirstDate:(NSDate *)firstDate lastDate:(NSDate *)lastDate
 {
